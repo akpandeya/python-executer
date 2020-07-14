@@ -6,9 +6,9 @@ from PySide2.QtWidgets import QFileDialog, QFileSystemModel, QWidget, QVBoxLayou
 from PySide2.QtCore import QFile, qApp, QDir, Qt
 from PySide2.QtGui import QStandardItem, QStandardItemModel
 
-class filesSelector(QMainWindow):
+class filesSelector(QWidget):
     def __init__(self, *args, **kwargs):
-        super(filesSelector, self).__init__(*args, **kwargs)
+        #super(filesSelector, self).__init__(*args, **kwargs)
         self.directory_browse =  QWidget()
         self.directory_browse_layout = QVBoxLayout()
         self.directory_browse.setLayout(self.directory_browse_layout)
@@ -31,6 +31,8 @@ class filesSelector(QMainWindow):
         self.select_file_button.setObjectName("browseButton")
         self.select_file_button.setText("Select File")
         self.file_option_widget_layout.addWidget(self.select_file_button)
+
+        self.select_folder_button.clicked.connect(self.select_folder)
 
         
 
@@ -62,5 +64,6 @@ class filesSelector(QMainWindow):
             item.setCheckable(True)
             self.file_model.appendRow(item)
         self.file_list_view.setModel(self.file_model)
+        self.update()
         #self.treeView.setModel(directory_model)
         #self.treeView.setRootIndex(directory_model.index(self.directoryUrl.toDisplayString()))
